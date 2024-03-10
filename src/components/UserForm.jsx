@@ -1,10 +1,26 @@
 import { Button, Grid, Input, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const UserForm = (props) => {
+const UserForm = ({addUser,updateUser, submit, data, isEdit}) => {
 
   const [id, setId] = useState(0);
   const [name, setName] = useState('');
+
+  useEffect(() => {
+    if (!submit){
+      setId(0);
+      setName('');
+    }
+     },[submit]);
+
+     
+  useEffect(() => {
+    if(data?.id && data.id !==0){
+      setId(data.id);
+      setName(data.name);
+      
+    }
+  }, [data]);
 
 
   return (
@@ -73,11 +89,12 @@ const UserForm = (props) => {
         </Grid>
 
         <Button
+        onClick={()=> isEdit? updateUser({id:id, name:name}) : addUser({id:id, name:name})}
         disableElevation
           variant="contained"
           sx={{ margin: "20px", textTransform: "capitalize" }}
         >
-          Submit
+          {isEdit? 'Update':'Add'}
         </Button>
       </Grid>
     </React.Fragment>

@@ -32,8 +32,8 @@ function UserTable(props) {
                 {row.name}
               </TableCell>
               <TableCell>
-                <Button onClick={e=>{}} sx={{textTransform:'capitalize'}}>Update</Button>
-                <Button onClick={e=>{}} sx={{textTransform:'capitalize'}}>Delete</Button>
+                <Button onClick={() => props.selectedUser({id:row.id, name:row.name})} sx={{textTransform:'capitalize'}}>Update</Button>
+                <Button onClick={() => props.deleteUser({id:row.id})} sx={{textTransform:'capitalize'}}>Delete</Button>
               </TableCell>
             </TableRow>
           ))
